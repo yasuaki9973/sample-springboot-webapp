@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>顧客一覧</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+
+        <div>
+
+            <form th:action="@{/customers/create}" th:object="${customer}" method="post">
+
+                <dl>
+                    <dt><label for="lastName">姓</label></dt>
+                    <dd>
+                        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" th:errorclass="error-input"/>
+                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-messages"></span>
+                    </dd>
+
+                    <dt><label for="firstName">名</label></dt>
+                    <dd>
+                        <input type="text" id="firstName" name="firstName" th:field="*{firstName}" th:errorclass="error-input"/>
+                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-messages"></span>
+                    </dd>
+
+                </dl>
+
+                <input type="submit" value="作成"/>
+
+            </form>
+
+        </div>
+        
+        <hr/>
+
+        <table>
+
+            <tr th:each="customer: ${customers}">
+
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.lastName}"></td>
+                <td th:text="${customer.firstName}"></td>
+
+                <td>
+                    <form th:action="@{customers/edit}" method="get">
+                        <input type="submit" name="form" value="編集"/>
+                        <input type="hidden" name="id" th:value="${customer.id}"/>
+                    </form>
+                </td>
+
+                <td>
+                    <form th:action="@{customers/delete}" method="post">
+                        <input type="submit" value="削除"/>
+                        <input type="hidden" name="id" th:value="${customer.id}"/>
+                    </form>
+                </td>
+
+            </tr>
+
+        </table>
+    </body>
+</html>
