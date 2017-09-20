@@ -16,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -51,6 +52,42 @@ public class CustomerController {
         }
 
         customerService.create(customer);
+        return "redirect:/customers";
+    }
+
+    //
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    String editForm(@RequestParam Integer id, Model model) {
+
+        Customer customer = customerService.findOne(id);
+        model.addAttribute("customer", customer);
+
+        return "customers/edit";
+    }
+
+    //
+    @RequestMapping(value = "edit", params = "edit", method = RequestMethod.POST)
+    String edit(@RequestParam Integer id, @Validated Customer customer, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            return editForm(id, model);
+        }
+
+        customerService.update(customer);
+        return "redirect:/customers";
+    }
+
+    //
+    @RequestMapping(value = "edit", params = "goToTop", method = RequestMethod.POST)
+    String goToTop() {
+        return "redirect:/customers";
+    }
+
+    //
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    String delete(@RequestParam Integer id, Model model) {
+
+        customerService.delete(id);
         return "redirect:/customers";
     }
 
