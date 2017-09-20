@@ -2,7 +2,6 @@ package com.example;
 
 import com.example.domain.Customer;
 import com.example.service.CustomerService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,12 +20,6 @@ public class MainApp implements CommandLineRunner {
         customerService.create(new Customer(null, "Nobita", "Nobi"));
         customerService.create(new Customer(null, "Takeshi", "Goda"));
         customerService.create(new Customer(null, "Shizuka", "Minamoto"));
-
-        List<Customer> list = customerService.findAll();
-
-        for (Customer customer : list) {
-            System.out.println(customer.getFirstName());
-        }
 
     }
 
