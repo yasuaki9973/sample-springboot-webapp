@@ -7,8 +7,10 @@ package com.example.controller;
 
 import com.example.domain.Customer;
 import com.example.service.CustomerService;
+import com.example.service.LoginUserDetails;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,13 +47,13 @@ public class CustomerController {
 
     //
     @RequestMapping(value = "create", method = RequestMethod.POST)
-    String create(@Validated Customer customer, BindingResult result, Model model) {
+    String create(@Validated Customer customer, BindingResult result, Model model, @AuthenticationPrincipal LoginUserDetails userDetails) {
 
         if (result.hasErrors()) {
             return list(model);
         }
 
-        customerService.create(customer);
+        customerService.create(customer, userDetails.getUser().getUserName());
         return "redirect:/customers";
     }
 
@@ -67,13 +69,13 @@ public class CustomerController {
 
     //
     @RequestMapping(value = "edit", params = "edit", method = RequestMethod.POST)
-    String edit(@RequestParam Integer id, @Validated Customer customer, BindingResult result, Model model) {
+    String edit(@RequestParam Integer id, @Validated Customer customer, BindingResult result, Model model, @AuthenticationPrincipal LoginUserDetails userDetails) {
 
         if (result.hasErrors()) {
             return editForm(id, model);
         }
 
-        customerService.update(customer);
+        customerService.update(customer, userDetails.getUser().getUserName());
         return "redirect:/customers";
     }
 

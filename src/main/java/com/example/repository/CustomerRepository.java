@@ -33,20 +33,21 @@ public class CustomerRepository {
         Integer id = rs.getInt("id");
         String firstName = rs.getString("first_name");
         String lastName = rs.getString("last_name");
+        String userName = rs.getString("user_name");
 
-        return new Customer(id, firstName, lastName);
+        return new Customer(id, firstName, lastName, userName);
     };
 
     public List<Customer> findAll() {
 
-        String query = "SELECT id, first_name, last_name FROM customers ORDER BY first_name, last_name";
+        String query = "SELECT id, first_name, last_name, user_name FROM customers ORDER BY id";
         return jdbcTemplate.query(query, customerRowMapper);
     }
 
     public Customer findOne(Integer customerId) {
 
         SqlParameterSource param = new MapSqlParameterSource().addValue("id", customerId);
-        String query = "SELECT id, first_name, last_name FROM customers WHERE id=:id";
+        String query = "SELECT id, first_name, last_name, user_name FROM customers WHERE id=:id";
 
         return jdbcTemplate.queryForObject(query, param, customerRowMapper);
     }
@@ -58,8 +59,8 @@ public class CustomerRepository {
         }
 
         SqlParameterSource param = new BeanPropertySqlParameterSource(customer);
-        String insertQuery = "INSERT INTO customers(first_name,last_name) values(:firstName,:lastName)";
-        String updateQuery = "UPDATE customers SET first_name=:firstName,last_name=:lastName WHERE id =:id";
+        String insertQuery = "INSERT INTO customers(first_name,last_name,user_name) values(:firstName,:lastName,:userName)";
+        String updateQuery = "UPDATE customers SET first_name=:firstName,last_name=:lastName,user_name=:userName WHERE id =:id";
 
         if (customer.getId() == null) {
             jdbcTemplate.update(insertQuery, param);

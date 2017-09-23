@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>ログインフォーム</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+
+        <div>
+
+            <h1>顧客管理システム</h1>
+
+            <form th:action="@{/login}" method="post">
+
+                <h2>ログインフォーム</h2>
+
+                <div th:if="${param.error}" class="alert alert-danger">
+                    ユーザー名またはパスワードが正しくありません。
+                </div>
+                <input type="text" class="form-control" name="username" placeholder="Username" required="required" autofocus="autofocus"/>
+                <input type="password" class="form-control" name="password" placeholder="Password" required="required"/>
+
+                <button type="submit">Sign in</button>
+
+            </form>
+        </div>
+    </body>
+</html>
+

@@ -5,9 +5,6 @@
  */
 package com.example.domain;
 
-import java.io.Serializable;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,18 +16,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer implements Serializable {
-
-    private Integer id;
-
-    @NotNull
-    @Size(min = 1, max = 127)
-    private String firstName;
-
-    @NotNull
-    @Size(min = 1, max = 127)
-    private String lastName;
+public class User {
 
     private String userName;
 
+    private String encodedPassword;
+
+    //private List<Customer> customers;
 }

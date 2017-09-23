@@ -8,4 +8,5 @@
  * Created: 2017/09/10
  */
 
-CREATE TABLE IF NOT EXISTS customers (id INT PRIMARY KEY AUTO_INCREMENT, first_name VARCHAR(30), last_name VARCHAR(30));
+CREATE TABLE IF NOT EXISTS users (user_name VARCHAR(30) PRIMARY KEY , encoded_password VARCHAR(100));
+CREATE TABLE IF NOT EXISTS customers (id INT PRIMARY KEY AUTO_INCREMENT, first_name VARCHAR(30), last_name VARCHAR(30), user_name VARCHAR(30));

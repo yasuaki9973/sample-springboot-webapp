@@ -7,8 +7,10 @@ package com.example.controller;
 
 import com.example.domain.Customer;
 import com.example.service.CustomerService;
+import com.example.service.LoginUserDetails;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,15 +42,15 @@ public class CustomerRestController {
 
     //顧客情報1件登録
     @RequestMapping(method = RequestMethod.POST)
-    Customer createCustomer(@RequestBody Customer customer) {
-        return customerService.create(customer);
+    Customer createCustomer(@RequestBody Customer customer, @AuthenticationPrincipal LoginUserDetails userDetails) {
+        return customerService.create(customer, userDetails.getUser().getUserName());
     }
 
     //顧客情報1件更新
     @RequestMapping(value = "{customerId}", method = RequestMethod.PUT)
-    Customer updateCustomer(@PathVariable(value = "customerId") Integer customerId, @RequestBody Customer customer) {
+    Customer updateCustomer(@PathVariable(value = "customerId") Integer customerId, @RequestBody Customer customer, @AuthenticationPrincipal LoginUserDetails userDetails) {
         customer.setId(customerId);
-        return customerService.create(customer);
+        return customerService.create(customer, userDetails.getUser().getUserName());
     }
 
     //顧客情報1件削除
