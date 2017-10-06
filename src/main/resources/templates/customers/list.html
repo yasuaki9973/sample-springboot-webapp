@@ -1,67 +1,113 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja">
     <head>
-        <title>顧客一覧</title>
         <meta charset="UTF-8"/>
+        <title>顧客一覧</title>
+        <style>
+            body { font-size: 13px; font-family: Arial; }
+            h1 { font-size: 14px;} 
+        </style>
     </head>
     <body>
 
-        <div>
+        <!-- View -->
+        <div id ="myapp1">
 
-            <form th:action="@{/customers/create}" th:object="${customer}" method="post">
+            <h1>新規作成</h1>
 
-                <dl>
-                    <dt><label for="lastName">姓</label></dt>
-                    <dd>
-                        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" th:errorclass="error-input"/>
-                        <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-messages"></span>
-                    </dd>
+            <input type="text" v-model="lastName" placeholder="姓"/>
+            <input type="text" v-model="firstName" placeholder="名"/>
 
-                    <dt><label for="firstName">名</label></dt>
-                    <dd>
-                        <input type="text" id="firstName" name="firstName" th:field="*{firstName}" th:errorclass="error-input"/>
-                        <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-messages"></span>
-                    </dd>
+            <input type="button" v-on:click="insert" value="登録"/>
+        </div>
 
-                </dl>
+        <div id ="myapp2">
 
-                <input type="submit" value="作成"/>
+            <h1>顧客リスト</h1>
 
-            </form>
+            <table border="0">
+
+                <tr>
+                    <th>姓</th>
+                    <th>名</th>
+                    <th>編集</th>
+                    <th>削除</th>
+                </tr>
+
+                <tr v-for="customer in customers">
+                    <td>{{customer.lastName}}</td>
+                    <td>{{customer.firstName}}</td>
+                    <td><input type="button" v-on:click="update(customer)" value="編集"/></td>
+                    <td><input type="button" v-on:click="del(customer)" value="削除"/></td>
+                </tr>
+
+            </table>
 
         </div>
-        
-        <hr/>
 
-        <table>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-            <tr th:each="customer: ${customers}">
+        <!-- View Model-->
+        <script>
 
-                <td th:text="${customer.id}"></td>
-                <td th:text="${customer.lastName}"></td>
-                <td th:text="${customer.firstName}"></td>
+var vm1 = new Vue({
+    el: '#myapp1',
+    data: {
+        lastName: '',
+        firstName: ''
 
-                <td>
-                    <form th:action="@{customers/edit}" method="get">
-                        <input type="submit" name="form" value="編集"/>
-                        <input type="hidden" name="id" th:value="${customer.id}"/>
-                    </form>
-                </td>
+    },
+    methods: {
+        insert: function () {
+            alert(this.lastName + ':' + this.firstName + '未実装機能です。');
+            this.lastName = '';
+            this.firstName = '';
+        },
+    }
 
-                <td>
-                    <form th:action="@{customers/delete}" method="post">
-                        <input type="submit" value="削除"/>
-                        <input type="hidden" name="id" th:value="${customer.id}"/>
-                    </form>
-                </td>
+});
 
-            </tr>
+var url = 'http://localhost:8080/api/customers';
 
-        </table>
+var vm2 = axios.get(url).then(function (response) {
+
+    return new Vue({
+        el: '#myapp2',
+        data: {
+            customers: response.data
+        },
+        methods: {
+            insert: function () {
+                alert(this.lastName + ':' + this.firstName + '未実装機能です。');
+                this.lastName = '';
+                this.firstName = '';
+            },
+            del: function (customer) {
+
+                if (!confirm("削除してもよろしいですか？")) {
+                    return;
+                }
+
+                var customers = this.customers;
+                var index = customers.indexOf(customer);
+
+                axios.delete(url + '/' + customer.id).then(function () {
+                    customers.splice(index, 1);
+                });
+
+            },
+            update: function (customer) {
+                alert('未実装機能です。');
+            }
+
+        }
+
+    });
+
+});
+
+        </script>
+
     </body>
 </html>
