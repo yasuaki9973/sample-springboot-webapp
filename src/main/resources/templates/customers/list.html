@@ -5,13 +5,15 @@
         <title>顧客一覧</title>
         <style>
             body { font-size: 13px; font-family: Arial; }
-            h1 { font-size: 14px;} 
+            h1 { font-size: 14px;}
+            [v-cloak] {display: none;}
         </style>
     </head>
+    
     <body>
 
         <!-- View -->
-        <div id ="myapp1">
+        <div id ="myapp1" v-cloak=''>
 
             <h1>新規作成</h1>
 
@@ -21,7 +23,7 @@
             <input type="button" v-on:click="insert" value="登録"/>
         </div>
 
-        <div id ="myapp2">
+        <div id ="myapp2" v-cloak=''>
 
             <h1>顧客リスト</h1>
 
@@ -46,66 +48,67 @@
         </div>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.1/vue.js"></script>
+        <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
         <!-- View Model-->
         <script>
 
-var vm1 = new Vue({
-    el: '#myapp1',
-    data: {
-        lastName: '',
-        firstName: ''
+            var vm1 = new Vue({
+            el: '#myapp1',
+            data: {
+            lastName: '',
+            firstName: ''
 
-    },
-    methods: {
-        insert: function () {
+            },
+            methods: {
+            insert: function () {
             alert(this.lastName + ':' + this.firstName + '未実装機能です。');
             this.lastName = '';
             this.firstName = '';
-        },
-    }
+            },
+            }
 
-});
+            });
 
-var url = 'http://localhost:8080/api/customers';
+            var url = 'http://localhost:8080/api/customers';
 
-var vm2 = axios.get(url).then(function (response) {
+            var vm2 = axios.get(url).then(function (response) {
 
-    return new Vue({
-        el: '#myapp2',
-        data: {
+            return new Vue({
+            el: '#myapp2',
+            data: {
             customers: response.data
-        },
-        methods: {
+            },
+            methods: {
             insert: function () {
-                alert(this.lastName + ':' + this.firstName + '未実装機能です。');
-                this.lastName = '';
-                this.firstName = '';
+            alert(this.lastName + ':' + this.firstName + '未実装機能です。');
+            this.lastName = '';
+            this.firstName = '';
             },
             del: function (customer) {
 
-                if (!confirm("削除してもよろしいですか？")) {
-                    return;
-                }
+            if (!confirm("削除してもよろしいですか？")) {
+            return;
+            }
 
-                var customers = this.customers;
-                var index = customers.indexOf(customer);
+            var customers = this.customers;
+            var index = customers.indexOf(customer);
 
-                axios.delete(url + '/' + customer.id).then(function () {
-                    customers.splice(index, 1);
-                });
+            axios.delete(url + '/' + customer.id).then(function () {
+            customers.splice(index, 1);
+            });
 
             },
             update: function (customer) {
-                alert('未実装機能です。');
+            alert('未実装機能です。');
             }
 
-        }
+            }
 
-    });
+            });
 
-});
+            });
 
         </script>
 
