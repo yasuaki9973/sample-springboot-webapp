@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.controller;
+package mvc.controller;
 
-import com.example.domain.Customer;
-import com.example.service.CustomerService;
+import mvc.domain.Customer;
+import mvc.service.CustomerService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

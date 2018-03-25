@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.service;
+package mvc.service;
 
-import com.example.domain.User;
-import com.example.repository.UserRepository;
+import mvc.domain.User;
+import mvc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

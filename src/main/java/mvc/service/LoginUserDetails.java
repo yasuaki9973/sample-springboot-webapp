@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.service;
+package mvc.service;
 
-import com.example.domain.User;
+import mvc.domain.User;
 import lombok.Data;
 import org.springframework.security.core.authority.AuthorityUtils;
 

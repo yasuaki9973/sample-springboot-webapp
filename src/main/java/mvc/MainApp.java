@@ -1,4 +1,6 @@
-package com.example;
+package mvc;
+
+
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
