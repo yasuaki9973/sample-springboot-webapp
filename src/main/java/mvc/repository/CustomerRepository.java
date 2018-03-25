@@ -35,7 +35,7 @@ public class CustomerRepository {
         String lastName = rs.getString("last_name");
         String userName = rs.getString("user_name");
 
-        return new Customer(id, firstName, lastName, userName);
+        return null;//new Customer(id, firstName, lastName, userName);
     };
 
     public List<Customer> findAll() {

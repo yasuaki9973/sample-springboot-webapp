@@ -8,6 +8,7 @@ package mvc.service;
 import mvc.domain.Customer;
 import mvc.repository.CustomerRepository;
 import java.util.List;
+import mvc.repository.SampleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,11 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
+    @Autowired
+    SampleMapper sampleMapper;
+
     public List<Customer> findAll() {
-        return customerRepository.findAll();
+        return sampleMapper.findAll();
     }
 
     public Customer findOne(Integer customerId) {
