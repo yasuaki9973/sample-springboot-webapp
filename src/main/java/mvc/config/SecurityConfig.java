@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mvc.config;
 
 import org.springframework.context.annotation.Bean;
@@ -39,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .loginPage("/loginForm")
                 .failureUrl("/loginForm?error")
-                .defaultSuccessUrl("/customers", true)
+                .defaultSuccessUrl("/customer", true)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and()
