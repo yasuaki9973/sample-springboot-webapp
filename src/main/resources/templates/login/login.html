@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>ログインフォーム</title>
+        <title>ログイン</title>
         <meta charset="UTF-8"/>
     </head>
     <body>
 
         <div>
 
-            <h1>顧客管理システム</h1>
-
             <form th:action="@{/login}" method="post">
 
-                <h2>ログインフォーム</h2>
+                <h2>ログイン画面</h2>
 
                 <div th:if="${param.error}" class="alert alert-danger">
                     ユーザー名またはパスワードが正しくありません。
@@ -20,7 +18,7 @@
                 <input type="text" class="form-control" name="username" placeholder="Username" required="required" autofocus="autofocus"/>
                 <input type="password" class="form-control" name="password" placeholder="Password" required="required"/>
 
-                <button type="submit">Sign in</button>
+                <button type="submit">ログイン</button>
 
             </form>
         </div>

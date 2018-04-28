@@ -34,11 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .loginPage("/loginForm")
                 .failureUrl("/loginForm?error")
-                .defaultSuccessUrl("/customer", true)
+                .defaultSuccessUrl("/top", true)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and()
                 .logout()
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/loginForm")
                 .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }

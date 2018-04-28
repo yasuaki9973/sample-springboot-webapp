@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>トップページ</title>
+    </head>
+
+    <body>
+        <h2>メニュー</h2>
+        
+        <ul>
+            <li><a href="/user/profile">プロフィール画面</a></li>
+            <li><a th:if="${user.role == 'admin'}" href="/user">ユーザー管理画面</a></li>
+        </ul>
+
+    </body>
+</html>

@@ -1,5 +1,6 @@
 package mvc.service;
 
+import java.util.List;
 import mvc.domain.User;
 import mvc.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,16 @@ public class UserService {
         return userRepository.findOne(userName);
     }
 
-    // 本メソッド呼び出し前にパスワードの暗号化をしておくこと
-    public User create(User user) {
-        return userRepository.save(user);
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public void updateUser(User user) {
+        userRepository.updateUser(user);
+    }
+
+    public void deleteUser(User user) {
+        userRepository.deleteUser(user);
     }
 
 }

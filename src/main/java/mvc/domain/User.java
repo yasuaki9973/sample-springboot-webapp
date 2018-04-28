@@ -10,6 +10,8 @@ public class User {
 
     private String encodedPassword;
 
+    private String role;
+
     public String getUserName() {
         return userName;
     }
@@ -24,6 +26,14 @@ public class User {
 
     public void setEncodedPassword(String encodedPassword) {
         this.encodedPassword = encodedPassword;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 }

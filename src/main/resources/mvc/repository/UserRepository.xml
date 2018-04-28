@@ -9,24 +9,58 @@
       SELECT 
         
         user_name, 
-        encoded_password
+        encoded_password,
+        role
 
-      FROM users
+      FROM user
         
       WHERE user_name = #{userName}
     
     </select>
-
-    <insert id="insertAuthor" parameterType="mvc.domain.User">
-     
-      INSERT INTO users (       
+    
+    <select id="findAll" resultType="mvc.domain.User">
+        
+      SELECT 
+        
         user_name,
-        encoded_password)
+        role
+        
+      FROM user
+        
+      ORDER BY user_name
+            
+    </select>
+   
+    <update id="updateUser" parameterType="mvc.domain.User">
+        
+      UPDATE user
+        
+      <set>
+      
+        <if test="userName != null" >
+          user_name = #{userName},
+        </if>
+        <if test="encodedPassword != null" >
+          encoded_password = #{encodedPassword},
+        </if>
+        <if test="role != null" >
+          role = #{role},
+        </if>
+        
+      </set>
+                      
+      WHERE user_name = #{userName}
+    
+    </update>
+      
+    <delete id="deleteUser" parameterType="mvc.domain.User">
 
-        values (
-          #{userName},
-          #{encodedPassword})
-
-    </insert>
+      DELETE
+        
+      FROM user
+      
+      WHERE user_name = #{userName}
+    
+    </delete>
 
 </mapper>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>ユーザー管理</title>
+    </head>
+
+    <body>
+
+        <table>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.userName}"></td>
+
+                <td>
+                    <form th:action="@{/user/update/role}" method="post" th:object="${user}">
+                        <input type="hidden" name="userName" th:value="${user.userName}"/>
+                        
+                        <input th:if="${user.role != 'admin'}" type="submit" value="管理者権限を付与する"/>
+                        <input th:if="${user.role != 'admin'}" type="hidden" name="role" th:value="admin"/>
+
+                        <input th:if="${user.role == 'admin'}" type="submit" value="管理者権限を外す"/>
+                        <input th:if="${user.role == 'admin'}" type="hidden" name="role" th:value="normal"/>
+                    
+                    </form>
+                </td>
+
+                <td>
+                    <form th:action="@{/user/delete}" method="post" th:object="${user}">
+                        <input type="submit" value="削除"/>
+                        <input type="hidden" name="userName" th:value="${user.userName}"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
