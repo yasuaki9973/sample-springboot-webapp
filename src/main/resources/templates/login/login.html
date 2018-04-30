@@ -1,27 +1,48 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
     <head>
         <title>ログイン</title>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"/>
+
     </head>
     <body>
 
-        <div>
+        <div class="bg-success mb-5" style="height:75px">
 
-            <form th:action="@{/login}" method="post">
+            <div class="pt-3 pl-2">
+                <span class="h2 font-weight-bold text-light pt-3">SpringBoot WebApp</span>
+            </div>
 
-                <h2>ログイン画面</h2>
+        </div>
 
-                <div th:if="${param.error}" class="alert alert-danger">
-                    ユーザー名またはパスワードが正しくありません。
+        <div class="container" style="height:600px">
+
+            <form class = "d-flex align-items-center h-100" th:action="@{/login}" method="post">
+
+                <div class="form-group mx-auto mt-5">
+
+                    <div th:if="${param.error}" class="alert alert-danger">
+                        ユーザー名またはパスワードが正しくありません。
+                    </div>
+                    <input type="text" class="form-control mt-1" name="username" placeholder="email" required="required" style="width:400px"/>
+                    <input type="password" class="form-control mt-1" name="password" placeholder="password" required="required" style="width:400px"/>
+
+                    <button type="submit" class="form-control btn btn-success mt-1">ログイン</button>
+
                 </div>
-                <input type="text" class="form-control" name="username" placeholder="Username" required="required" autofocus="autofocus"/>
-                <input type="password" class="form-control" name="password" placeholder="Password" required="required"/>
-
-                <button type="submit">ログイン</button>
 
             </form>
+
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
     </body>
 </html>
 
