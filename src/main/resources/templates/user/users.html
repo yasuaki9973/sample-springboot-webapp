@@ -1,36 +1,62 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <meta charset="UTF-8"/>
+
         <title>ユーザー管理</title>
+        <meta charset="UTF-8"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"/>
+
+        <!-- 初期設定 -->
+        <link rel="stylesheet" href="/css/default.css"/>
+
     </head>
 
     <body>
 
-        <table>
-            <tr th:each="user : ${users}">
-                <td th:text="${user.userName}"></td>
+        <header id="header" th:include="header"/>
 
-                <td>
-                    <form th:action="@{/user/update/role}" method="post" th:object="${user}">
-                        <input type="hidden" name="userName" th:value="${user.userName}"/>
-                        
-                        <input th:if="${user.role != 'admin'}" type="submit" value="管理者権限を付与する"/>
-                        <input th:if="${user.role != 'admin'}" type="hidden" name="role" th:value="admin"/>
+        <div class="container container-default">
+            <table class="table table-bordered">
 
-                        <input th:if="${user.role == 'admin'}" type="submit" value="管理者権限を外す"/>
-                        <input th:if="${user.role == 'admin'}" type="hidden" name="role" th:value="normal"/>
-                    
-                    </form>
-                </td>
+                <tr>
+                    <th class="text-center">ユーザー名</th>
+                    <th class="text-center">管理者権限</th>
+                    <th class="text-center">アカウント削除</th>
+                </tr>
 
-                <td>
-                    <form th:action="@{/user/delete}" method="post" th:object="${user}">
-                        <input type="submit" value="削除"/>
-                        <input type="hidden" name="userName" th:value="${user.userName}"/>
-                    </form>
-                </td>
-            </tr>
-        </table>
+                <tr th:each="user : ${users}">
+                    <td class="text-center pt-3" th:text="${user.userName}"></td>
+
+                    <td>
+                        <form class="text-center" th:action="@{/user/update/role}" method="post" th:object="${user}">
+                            <input type="hidden" name="userName" th:value="${user.userName}"/>
+
+                            <input class="btn btn-sm btn-warning" th:if="${user.role != 'admin'}" type="submit" value="権限を付与"/>
+                            <input th:if="${user.role != 'admin'}" type="hidden" name="role" th:value="admin"/>
+
+                            <input class="btn btn-sm btn-secondary" th:if="${user.role == 'admin'}" type="submit" value="権限を外す"/>
+                            <input th:if="${user.role == 'admin'}" type="hidden" name="role" th:value="normal"/>
+
+                        </form>
+                    </td>
+
+                    <td>
+                        <form class="text-center" th:action="@{/user/delete}" method="post" th:object="${editUser}">
+                            <input class="btn btn-sm btn-danger" type="submit" value="削除"/>
+                            <input type="hidden" name="userName" th:value="${user.userName}"/>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
     </body>
 </html>

@@ -23,6 +23,9 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LoginHelper loginHelper;
+
     @RequestMapping(value = "loginForm", method = RequestMethod.GET)
     String displayLoginPage() {
         return "login/login";
@@ -40,7 +43,7 @@ public class LoginController {
     @RequestMapping(value = "top", method = RequestMethod.GET)
     String displayTopPage(Model model) {
 
-        String email = LoginHelper.getLoginUserName();
+        String email = loginHelper.getLoginUserName();
         User user = userService.findOne(email);
 
         // ユーザー情報が削除されていた場合はログアウト

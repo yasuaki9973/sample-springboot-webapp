@@ -21,22 +21,29 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    LoginHelper loginHelper;
+
     @RequestMapping(method = RequestMethod.GET)
     String displayUsers(Model model) {
+
+        String email = loginHelper.getLoginUserName();
+        User user = userService.findOne(email);
+        model.addAttribute("user", user);
 
         // 一覧表示用の変数を設定する
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
 
         // 更新・削除用の変数を設定する
-        model.addAttribute("user", new User());
+        model.addAttribute("editUser", new User());
         return "user/users";
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
     String displayProfile(Model model) {
 
-        String email = LoginHelper.getLoginUserName();
+        String email = loginHelper.getLoginUserName();
         User user = userService.findOne(email);
         model.addAttribute("user", user);
 

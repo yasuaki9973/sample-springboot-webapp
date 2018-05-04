@@ -42,6 +42,9 @@ public class UserControllerTest {
     @Mock
     private UserService userService;
 
+    @Mock
+    private LoginHelper loginHelper;
+
     @BeforeClass
     public static void setUpClass() {
     }
@@ -53,6 +56,7 @@ public class UserControllerTest {
     @Before
     public void setUp() {
         mvc = MockMvcBuilders.standaloneSetup(this.userController).build();
+        when(this.loginHelper.getLoginUserName()).thenReturn("root");
     }
 
     @After
@@ -82,7 +86,7 @@ public class UserControllerTest {
 
         MvcResult result = mvc.perform(get("/user"))
                 .andExpect(status().isOk())
-                .andExpect(model().attributeExists("user"))
+                .andExpect(model().attributeExists("editUser"))
                 .andExpect(model().attributeExists("users"))
                 .andReturn();
 
