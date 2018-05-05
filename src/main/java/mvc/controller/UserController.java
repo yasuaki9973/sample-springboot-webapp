@@ -53,12 +53,7 @@ public class UserController {
     @RequestMapping(value = "/update/role", method = RequestMethod.POST)
     String updateUserRole(Model model, @ModelAttribute User user) {
 
-        System.out.println("どうやら動いているようだ");
-
         userService.updateUser(user);
-        
-        System.out.println("どうやら動いているようだ");
-        
         return "redirect:/user";
     }
 
