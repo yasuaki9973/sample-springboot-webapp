@@ -11,9 +11,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserRepository {
 
-    public User findOne(String userName);
+    public User selectUser(String userName);
 
-    public List<User> findAll();
+    public List<User> selectUsers();
 
     public void updateUser(User user);
 

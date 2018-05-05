@@ -16,12 +16,12 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public User findOne(String userName) {
-        return userRepository.findOne(userName);
+    public User selectUser(String userName) {
+        return userRepository.selectUser(userName);
     }
 
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<User> selectUsers() {
+        return userRepository.selectUsers();
     }
 
     public void updateUser(User user) {

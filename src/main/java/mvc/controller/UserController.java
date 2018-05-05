@@ -28,11 +28,11 @@ public class UserController {
     String displayUsers(Model model) {
 
         String email = loginHelper.getLoginUserName();
-        User user = userService.findOne(email);
+        User user = userService.selectUser(email);
         model.addAttribute("user", user);
 
         // 一覧表示用の変数を設定する
-        List<User> users = userService.findAll();
+        List<User> users = userService.selectUsers();
         model.addAttribute("users", users);
 
         // 更新・削除用の変数を設定する
@@ -44,7 +44,7 @@ public class UserController {
     String displayProfile(Model model) {
 
         String email = loginHelper.getLoginUserName();
-        User user = userService.findOne(email);
+        User user = userService.selectUser(email);
         model.addAttribute("user", user);
 
         return "user/profile";
@@ -53,7 +53,12 @@ public class UserController {
     @RequestMapping(value = "/update/role", method = RequestMethod.POST)
     String updateUserRole(Model model, @ModelAttribute User user) {
 
+        System.out.println("どうやら動いているようだ");
+
         userService.updateUser(user);
+        
+        System.out.println("どうやら動いているようだ");
+        
         return "redirect:/user";
     }
 

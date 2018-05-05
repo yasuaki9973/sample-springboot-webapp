@@ -44,7 +44,7 @@ public class LoginController {
     String displayTopPage(Model model) {
 
         String email = loginHelper.getLoginUserName();
-        User user = userService.findOne(email);
+        User user = userService.selectUser(email);
 
         // ユーザー情報が削除されていた場合はログアウト
         if (user == null) {
